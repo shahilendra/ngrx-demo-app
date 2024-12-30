@@ -1,0 +1,46 @@
+<ng-container *ngIf="employees$() as employees;">
+
+    <ul *ngIf="employees.length; else empty">
+      <li *ngFor="let employee of employees$(); let i = index;">
+      {{employee._id}}  {{ employee.name }} - {{ employee.age}}
+        <button [disabled]="employee.age > 40" (click)="updateEmployee(employee)">
+        Edit
+      </button>
+      <button  (click)="deleteEmployee(employee._id)">
+        Delete
+      </button>
+      </li>
+  
+    </ul>
+  
+    <ng-template #empty>
+      <div>No Data</div>
+    </ng-template>
+  
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+      <div>
+        <label>
+          Name:
+          <input formControlName="name" placeholder="Your name">
+        </label>
+        <!-- <div *ngIf="myForm.get('name').invalid && (myForm.get('name').dirty || myForm.get('name').touched)">
+          Please provide a name.
+        </div> -->
+      </div>
+      <div>
+        <label>
+          Age:
+          <input formControlName="age" placeholder="Your Age">
+        </label>
+        <!-- <div *ngIf="myForm.get('email').invalid && (myForm.get('email').dirty || myForm.get('email').touched)">
+          Please provide a valid email address.
+        </div> -->
+      </div>
+      <button type="submit" [disabled]="myForm.invalid">Send</button>
+    </form>
+  <button (click)="loadEmployee()">Refresh</button>
+  <button (click)="addEmployee()">Add</button>
+  
+  <div *ngIf="isLoading$()">Loading...</div>
+  
+  </ng-container>

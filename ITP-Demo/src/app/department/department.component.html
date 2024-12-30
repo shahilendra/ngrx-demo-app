@@ -1,0 +1,16 @@
+<ng-container *ngIf="departments$() as departments;">
+
+    <ul *ngIf="departments.length; else empty">
+      <li *ngFor="let employee of departments$(); let i = index;">
+      {{employee._id}}  {{ employee.name }} - {{ employee.desc}}
+      </li>  
+    </ul>
+  
+    <ng-template #empty>
+      <div>No Data</div>
+    </ng-template>
+  <button (click)="loadEmployee()">Refresh</button>
+  
+  <div *ngIf="isLoading$()">Loading...</div>
+  
+  </ng-container>

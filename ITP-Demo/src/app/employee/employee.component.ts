@@ -1,7 +1,7 @@
 import { Component, Signal } from '@angular/core';
 import { Employee } from '../employee.model';
 import { Store } from '@ngrx/store';
-import { AppState } from '../store/employee-store';
+import { AppState } from '../store/store';
 import { employeeSelector } from '../store/employee/employee-selectors';
 import * as EmployeeActions from '../store/employee/employee-actions';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -47,8 +47,10 @@ export class EmployeeComponent {
     );
   }
   deleteEmployee(id: string) {
-    this.store.dispatch(
-      EmployeeActions.deleteEmployee({id:id})
-    );
+    if(confirm('Would you like to delete this employee?')){
+      this.store.dispatch(
+        EmployeeActions.deleteEmployee({id:id})
+      );
+    }
   }
 }

@@ -5,6 +5,7 @@ import { of } from 'rxjs';
 import { DepartmentService } from './department-service.service';
 import * as DeparmentActions from './department-actions';
 import { Employee } from '../../employee.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class DepartmentEffects {
@@ -14,13 +15,54 @@ export class DepartmentEffects {
       ofType(DeparmentActions.loadDepartment),
       mergeMap(() =>
         this.departmentService.getAll().pipe(
-          map((departments) => DeparmentActions.loadDepartmentSuccess({departments})),
-          catchError((error) =>
-            of(DeparmentActions.loadDepartmentFailure({ error: error.message }))
-          )
+          map((departments) => {
+            this.toastr.success('Department load successfully!', 'Department Load!');
+            return DeparmentActions.loadDepartmentSuccess({departments});
+          }),
+          catchError((error) => {
+            this.toastr.error(error.message, 'Department Load!');
+           return of(DeparmentActions.loadDepartmentFailure({ error: error.message }));
+          })
         )
       )
     )
   );
-  constructor(private actions$: Actions, private departmentService: DepartmentService) {}
+  createDepartment$ = createEffect(() =>
+      this.actions$.pipe(
+        ofType(DeparmentActions.addDepartment),
+        exhaustMap(action =>
+          this.departmentService.create(action.department).pipe(
+            map((department) => {
+             this.toastr.success('Department Added Successfully!', 'Department Added!');
+              return DeparmentActions.loadDepartment()
+            }),
+            catchError((error) => {
+              alert(error.message);
+              this.toastr.error(error.message, 'Department Added!');
+              return of(DeparmentActions.addDepartmentFailure({ error: error.message }))
+            })
+          )
+        )
+      )
+    );
+
+    deleteEmployee$ = createEffect(() =>
+        this.actions$.pipe(
+          ofType(DeparmentActions.deleteDepartment),
+          exhaustMap(action =>
+            this.departmentService.delete(action.id).pipe(
+              map((data) => {
+                this.toastr.success(data.message, 'Department Delete!');
+                return DeparmentActions.deleteDepartmentSuccess({id:action.id})
+              }),
+              catchError((error) => {
+                this.toastr.error(error.message, 'Department Delete!');
+                return of(DeparmentActions.deleteDepartmentFailure({ error: error.message }))
+              }
+              )
+            )
+          )
+        )
+      );
+  constructor(private actions$: Actions, private departmentService: DepartmentService, private toastr: ToastrService) {}
 }

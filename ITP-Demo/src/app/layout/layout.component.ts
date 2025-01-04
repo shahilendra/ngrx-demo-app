@@ -66,6 +66,12 @@ export class LayoutComponent {
           color: '#ff7f0e',
         },
         {
+          title: 'Add Employees',
+          icon: 'money',
+          link: '/add-employees',
+          color: '#ff7f0e',
+        },
+        {
           title: 'Departments',
           icon: 'people',
           color: '#ff7f0e',

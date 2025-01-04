@@ -1,6 +1,6 @@
 import {  createSelector } from "@ngrx/store"
 import { EmployeeState } from "./employee-reducers";
-import { AppState } from "../employee-store";
+import { AppState } from "../store";
  
 
 const feature = (state: AppState) => state.employee;

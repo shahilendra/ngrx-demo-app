@@ -1,7 +1,7 @@
 import { Component, Signal } from '@angular/core';
 import { Department } from '../store/department/department.model';
 import { Store } from '@ngrx/store';
-import { AppState } from '../store/employee-store';
+import { AppState } from '../store/store';
 import { departmentSelector } from '../store/department/department-selectors';
 import { toSignal } from '@angular/core/rxjs-interop';
 import * as DepartmentActions from '../store/department/department-actions';
@@ -23,7 +23,15 @@ export class DepartmentComponent {
   loadEmployee() {
     this.store.dispatch(DepartmentActions.loadDepartment());
   }
-  // showSuccess() {
-  //   this.toastr.success('Hello world!', 'Toastr fun!');
-  // }
+  addDepartment() {
+    const department: Department = { _id: '', name: `HR`, desc: 'HR' };
+    this.store.dispatch(DepartmentActions.addDepartment({ department }));
+  }
+  deleteEmployee(id: string) {
+    if(confirm('Would you like to delete this department?')){
+      this.store.dispatch(
+        DepartmentActions.deleteDepartment({id:id})
+      );
+    }
+  }
 }

@@ -1,8 +1,11 @@
 <ng-container *ngIf="departments$() as departments;">
 
     <ul *ngIf="departments.length; else empty">
-      <li *ngFor="let employee of departments$(); let i = index;">
-      {{employee._id}}  {{ employee.name }} - {{ employee.desc}}
+      <li *ngFor="let department of departments$(); let i = index;">
+      {{department._id}}  {{ department.name }} - {{ department.desc}}
+      <button  (click)="deleteEmployee(department._id)">
+        Delete
+      </button>
       </li>  
     </ul>
   
@@ -10,7 +13,8 @@
       <div>No Data</div>
     </ng-template>
   <button (click)="loadEmployee()">Refresh</button>
-  
+  <button (click)="addDepartment()">Add Department</button>
   <div *ngIf="isLoading$()">Loading...</div>
   
   </ng-container>
+  

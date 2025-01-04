@@ -20,4 +20,13 @@ export const departmentReducer = createReducer(
     on(DepartmentActions.loadDepartmentSuccess, (state, { departments }) =>({ ...state, departments, loading: false })),
 
     on(DepartmentActions.loadDepartmentFailure, (state, { error }) => ({ ...state, error, loading: false })),
+    
+    on(DepartmentActions.addDepartmentSuccess, (state, { departments }) =>({ ...state, departments, loading: false })),
+
+    on(DepartmentActions.addDepartmentFailure, (state, { error }) => ({ ...state, error, loading: false })),
+
+    on(DepartmentActions.deleteDepartmentSuccess, (state, { id }) => ({ ...state, departments: state.departments.filter(t => t._id !== id) })),
+    
+    on(DepartmentActions.deleteDepartmentFailure, (state, { error }) => ({ ...state, error, loading: false }))
+    
 );

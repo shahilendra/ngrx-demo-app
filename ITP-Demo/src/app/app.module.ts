@@ -9,7 +9,7 @@ import { EmployeeServiceService } from './employee-service.service';
 import { EmployeeComponent } from './employee/employee.component';
 import { HttpClientModule } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -27,6 +27,9 @@ import { SalesComponent } from './sales.component';
 import { DepartmentComponent } from './department/department.component';
 import { ToastrModule } from 'ngx-toastr';
 import { AddEmployeeComponent } from './employee/add-employee/add-employee.component';
+
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -55,6 +58,7 @@ import { AddEmployeeComponent } from './employee/add-employee/add-employee.compo
     MatExpansionModule,
     MatMenuModule,
     ToastrModule.forRoot(),
+    FormsModule, MatFormFieldModule, MatInputModule
   ],
   providers: [provideStore(appStore), provideEffects(appEffects), EmployeeServiceService, provideAnimationsAsync()],
   bootstrap: [AppComponent]

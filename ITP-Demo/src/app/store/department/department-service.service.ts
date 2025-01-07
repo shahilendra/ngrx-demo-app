@@ -15,6 +15,9 @@ export class DepartmentService {
     return this.http.get<Department[]>(this.url);
   }
 
+  getById(id: string): Observable<Department> {
+    return this.http.get<Department>(`${this.url}/${id}`);
+  }
   create(department: Department): Observable<Department> {
     return this.http.post<Department>(this.url, department);
   }

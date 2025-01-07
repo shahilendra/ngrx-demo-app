@@ -9,3 +9,8 @@ export const departmentSelector = createSelector(
   feature,
   (state: DepartmentState) => state.departments
 );
+
+export const departmentByIdSelector = (id: string) => createSelector(
+  feature,
+  (state: DepartmentState) => state.departments.filter(x=>x._id == id)[0]
+);

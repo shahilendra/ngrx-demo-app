@@ -16,8 +16,25 @@ export class DepartmentEffects {
       mergeMap(() =>
         this.departmentService.getAll().pipe(
           map((departments) => {
-            this.toastr.success('Department load successfully!', 'Department Load!');
+            this.toastr.success('Departments load successfully!', 'Departments Load!');
             return DeparmentActions.loadDepartmentSuccess({departments});
+          }),
+          catchError((error) => {
+            this.toastr.error(error.message, 'Departments Load!');
+           return of(DeparmentActions.loadDepartmentFailure({ error: error.message }));
+          })
+        )
+      )
+    )
+  );
+  loadEmployeeById$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(DeparmentActions.loadDepartmentById),
+      mergeMap((action) =>
+        this.departmentService.getById(action.id).pipe(
+          map((department) => {
+            this.toastr.success('Department load successfully!', 'Department Load!');
+            return DeparmentActions.loadDepartmentByIdSuccess({department});
           }),
           catchError((error) => {
             this.toastr.error(error.message, 'Department Load!');

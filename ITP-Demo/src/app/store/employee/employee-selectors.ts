@@ -3,7 +3,7 @@ import { EmployeeState } from "./employee-reducers";
 import { AppState } from "../store";
  
 
-const feature = (state: AppState) => state.employee;
+const feature = (state: AppState) => state.employees;
 
 export const employeeSelector = createSelector(
   feature,

@@ -2,7 +2,7 @@ import { Component, Signal, ViewChild } from '@angular/core';
 import { Department } from '../store/department/department.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store/store';
-import { departmentSelector } from '../store/department/department-selectors';
+import { departmentExists, selectAllDepartments } from '../store/department/department-selectors';
 import { toSignal } from '@angular/core/rxjs-interop';
 import * as DepartmentActions from '../store/department/department-actions';
 import { ToastrService } from 'ngx-toastr';
@@ -23,9 +23,9 @@ export class DepartmentComponent {
     submitted = false;
     @ViewChild('myForm') myForm!: NgForm;
   constructor(private store: Store<AppState>, private formBuilder: FormBuilder) {
-    this.departments$ = toSignal(this.store.select(departmentSelector)); // observable converted to signal
-    this.isLoading$ = toSignal(this.store.select((state) => state.employee.loading));
-    this.loadEmployee();
+    this.departments$ = toSignal(this.store.select(selectAllDepartments)); // observable converted to signal
+    this.isLoading$ = toSignal(this.store.select((state) => state.departments.loading));
+    this.loadDepartment();
      this.form = this.formBuilder.group(
           {
             name: ['', Validators.required],
@@ -44,7 +44,7 @@ export class DepartmentComponent {
     return this.form.controls;
   }
 
-  loadEmployee() {
+  loadDepartment() {
     this.store.dispatch(DepartmentActions.loadDepartment());
   }
   addDepartment() {

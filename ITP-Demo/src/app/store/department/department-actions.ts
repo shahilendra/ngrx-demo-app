@@ -9,8 +9,12 @@ export const loadDepartmentById = createAction('[Department] Load By Id Departme
 export const loadDepartmentByIdSuccess = createAction('[Department] Load By Id Department Success', props<{ department: Department}>());
 
 export const addDepartment = createAction('[Department] Add Department', props<{department: Department}>());
-export const addDepartmentSuccess = createAction('[Department] Add Department Success', props<{ departments: Department[]}>());
+export const addDepartmentSuccess = createAction('[Department] Add Department Success', props<{ department: Department}>());
 export const addDepartmentFailure = createAction('[Department] Add Department Failure', props<{ error: string }>());
+
+export const updateDepartment = createAction('[Department] Update Department', props<{department: Department}>());
+export const updateDepartmentSuccess = createAction('[Department] Update Department Success', props<{ department: Department}>());
+
 
 export const deleteDepartment = createAction('[Department] Delete Department', props<{ id: string }>());
 export const deleteDepartmentSuccess = createAction('[Department] Delete Department Success', props<{ id: string}>());

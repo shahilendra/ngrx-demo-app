@@ -6,18 +6,18 @@ import { departmentReducer, DepartmentState } from "./department/department-redu
 
 
 export interface AppState {
-  employee: EmployeeState,
-  department: DepartmentState
+  employees: EmployeeState,
+  departments: DepartmentState
 }
 
 export interface AppStore {
-    employee: ActionReducer<EmployeeState, Action>;
-    department: ActionReducer<DepartmentState, Action>;
+    employees: ActionReducer<EmployeeState, Action>;
+    departments: ActionReducer<DepartmentState, Action>;
 }
 
 export const appStore: AppStore = {
-    employee: employeeReducer,
-    department: departmentReducer
+    employees: employeeReducer,
+    departments: departmentReducer
 }
 
 export const appEffects = [EmployeeEffects, DepartmentEffects];

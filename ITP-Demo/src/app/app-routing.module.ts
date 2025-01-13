@@ -6,6 +6,7 @@ import { SalesComponent } from './sales.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { DepartmentComponent } from './department/department.component';
 import { AddEmployeeComponent } from './employee/add-employee/add-employee.component';
+import { EditDepartmentComponent } from './department/edit-department/edit-department.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
       {
         path: 'departments',
         component: DepartmentComponent
+      },
+      {
+        path: 'edit/:id',
+        component: EditDepartmentComponent
       }
     ]
   }

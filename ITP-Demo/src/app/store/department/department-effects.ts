@@ -51,18 +51,36 @@ export class DepartmentEffects {
           this.departmentService.create(action.department).pipe(
             map((department) => {
              this.toastr.success('Department Added Successfully!', 'Department Added!');
-              return DeparmentActions.loadDepartment()
+              return DeparmentActions.addDepartmentSuccess({department});
             }),
             catchError((error) => {
               alert(error.message);
               this.toastr.error(error.message, 'Department Added!');
-              return of(DeparmentActions.addDepartmentFailure({ error: error.message }))
+              return of(DeparmentActions.loadDepartmentFailure({ error: error.message }))
             })
           )
         )
       )
     );
-
+    updateEmployee$ = createEffect(() =>
+        this.actions$.pipe(
+          ofType(DeparmentActions.updateDepartment),
+          exhaustMap(action =>
+            this.departmentService.update(action.department).pipe(
+              map((department) => {
+                this.toastr.success('Department Updated Successfully!', 'Department Update!');
+                return DeparmentActions.updateDepartmentSuccess({department})
+              }),
+              catchError((error) => {
+                this.toastr.error(error.message, 'Department Updated!');
+               return of(DeparmentActions.loadDepartmentFailure({ error: error.message }));
+              }
+                
+              )
+            )
+          )
+        )
+      );
     deleteEmployee$ = createEffect(() =>
         this.actions$.pipe(
           ofType(DeparmentActions.deleteDepartment),
@@ -74,7 +92,7 @@ export class DepartmentEffects {
               }),
               catchError((error) => {
                 this.toastr.error(error.message, 'Department Delete!');
-                return of(DeparmentActions.deleteDepartmentFailure({ error: error.message }))
+                return of(DeparmentActions.loadDepartmentFailure({ error: error.message }))
               }
               )
             )

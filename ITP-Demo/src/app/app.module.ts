@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { provideStore } from '@ngrx/store';
+import { provideStore, StoreModule } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { appEffects, appStore } from './store/store';
 import { EmployeeServiceService } from './employee-service.service';
@@ -30,6 +30,8 @@ import { AddEmployeeComponent } from './employee/add-employee/add-employee.compo
 
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { EditDepartmentComponent } from './department/edit-department/edit-department.component';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     SalesComponent,
     HomeComponent,
     DepartmentComponent,
-    AddEmployeeComponent
+    AddEmployeeComponent,
+    EditDepartmentComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +61,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatExpansionModule,
     MatMenuModule,
     ToastrModule.forRoot(),
-    FormsModule, MatFormFieldModule, MatInputModule
+    FormsModule, MatFormFieldModule, MatInputModule,
+    StoreModule.forRoot(appStore),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: false })
   ],
   providers: [provideStore(appStore), provideEffects(appEffects), EmployeeServiceService, provideAnimationsAsync()],
   bootstrap: [AppComponent]

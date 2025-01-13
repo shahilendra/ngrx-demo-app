@@ -24,7 +24,7 @@ export class EmployeeComponent {
   }
   constructor(private store: Store<AppState>, private fb: FormBuilder) {
     this.employees$ = toSignal(this.store.select(employeeSelector)); // observable converted to signal
-    this.isLoading$ = toSignal(this.store.select((state) => state.employee.loading));
+    this.isLoading$ = toSignal(this.store.select((state) => state.employees.loading));
     this.loadEmployee();
   }
   onSubmit(form: FormGroup) {

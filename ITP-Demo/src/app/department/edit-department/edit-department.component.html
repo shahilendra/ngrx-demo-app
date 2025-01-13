@@ -1,24 +1,5 @@
-<ng-container *ngIf="departments$() as departments;">
-
-    <ul *ngIf="departments.length; else empty">
-      <li *ngFor="let department of departments$(); let i = index;">
-      {{department._id}}  {{ department.name }} - {{ department.desc}}
-      <a [routerLink]="['/edit', department._id]">edit</a>
-      <button  (click)="deleteEmployee(department._id)">
-        Delete
-      </button>
-      </li>  
-    </ul>
-  
-    <ng-template #empty>
-      <div>No Data</div>
-    </ng-template>
-  <button (click)="loadDepartment()">Refresh</button>
-  <button (click)="addDepartment()">Add Department</button>
-  <div *ngIf="isLoading$()">Loading...</div>
-  </ng-container>
-
-  <form class="example-form" #myForm="ngForm" [formGroup]="form" (ngSubmit)="onSubmit()">
+<p *ngIf="department$| async as department">{{department.name}}</p>
+<form class="example-form" #myForm="ngForm" [formGroup]="form" (ngSubmit)="onSubmit()">
     <mat-form-field class="example-full-width">
       <mat-label>Name</mat-label>
       <input type="text" matInput formControlName="name"

@@ -85,12 +85,15 @@ export class EditDepartmentComponent implements OnInit {
         this.submitted = false;
         this.form.reset();
         this.myForm.resetForm();
-        this.router.navigate(['/departments'])
+        this.router.navigate(['/departments']);
       }
       onReset(): void {
         this.submitted = false;
         this.form.reset();
         this.myForm.resetForm();
+      }
+      onCancel(): void {
+        this.router.navigate(['/departments']);
       }
     ngOnDestroy(): void {
       console.log('ngOnDestroy called');
